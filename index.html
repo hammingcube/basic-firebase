@@ -1,0 +1,39 @@
+</!DOCTYPE html>
+<html>
+  <head>
+    <title>Firebase Test App</title>
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "",
+        authDomain: "xyz.firebaseapp.com",
+        databaseURL: "https://xyz.firebaseio.com",
+        storageBucket: "firebase-xyz.appspot.com",
+        messagingSenderId: ""
+      };
+      firebase.initializeApp(config);
+      var database = firebase.database();
+
+      function writeTestData(userId, name, email) {
+        firebase.database().ref('test/' + userId).set({
+          username: name,
+          email: email,
+        });
+      }
+      function sendToServer() {
+        var name = document.getElementsByName("name")[0].value;
+        var email = document.getElementsByName("email")[0].value;
+        writeTestData("abc123", name, email);
+      }
+    </script>
+  </head>
+
+  <body>
+    <form>
+      Name: <input type="text" name="name" value="Johnny Bravo">
+      Email: <input type="text" name="email" value="jbravo@gmail.com">
+    </form>
+    <button onclick="sendToServer()">send to server</button>
+  </body>
+</html>
